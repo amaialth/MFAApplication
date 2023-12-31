@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div  class="d-flex justify-content-center align-items-center">
+        <div *ngIf="!mfaRes" class="card">
+            <div class="card-header d-flex justify-content-center p-4">
+                <h5 class="card-title">Sign Up</h5>
+            </div>
+            <div class="card-body">
+    <form [formGroup]="registerForm">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="firstName">First Name</span>
+            <input type="text" class="form-control" formControlName="firstName"  placeholder="First name" aria-label="First Name" aria-describedby="firstName">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="lastName">Last Name</span>
+            <input type="text" class="form-control" formControlName="lastName"  placeholder="Last name" aria-label="Last name" aria-describedby="lastName">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="email">E-Mail</span>
+            <input type="text" class="form-control" formControlName="username"  placeholder="Email" aria-label="Email" aria-describedby="email">
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="password">Password</span>
+            <input type="password" class="form-control" formControlName="password"  placeholder="Password" aria-label="Password" aria-describedby="password">
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" formControlName="enableMfa"  type="checkbox" role="switch" id="mfa" checked>
+            <label class="form-check-label" for="mfa">Multi-Factor Authentication</label>
+          </div>
+          <div class="d-flex justify-content-center p-2">
+              <button type="button" [disabled]="!registerForm.valid" class="btn btn-primary" (click)="register()">Register</button>
+          </div>
+    </form>
+    
+    </div>
+    <div class="card-footer d-flex justify-content-center p-4">
+        <a routerLink="/login" class="card-link">Already have an account?</a>
+    </div>
+        </div>
+        <div *ngIf="mfaRes">
+          <app-display-qr  [qrCode]="mfaRes.qrCode" [qrCodeKey]="mfaRes.mfaCode" [username]="this.registerForm.controls['username'].value"></app-display-qr>
+        </div>
+    </div>
+</div>

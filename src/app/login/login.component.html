@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
+        <div *ngIf="!response || !response.authValid" class="card">
+            <div class="card-header d-flex justify-content-center p-4">
+                <h5 class="card-title">Sign In</h5>
+            </div>
+            <div class="card-body">
+                <div *ngIf="message" class="alert alert-primary" role="alert">
+                    {{message}}
+                  </div>
+                <form [formGroup]="loginForm">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Username</span>
+                        <input type="text" class="form-control" formControlName="username" placeholder="Username"
+                            aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="password">Password</span>
+                        <input type="password" class="form-control" formControlName="password" placeholder="Password"
+                            aria-label="Password" aria-describedby="password">
+                    </div>
+                    <div class="d-flex justify-content-center p-2">
+                        <button type="button" class="btn btn-primary" (click)="login()">Login</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center p-4">
+                <a routerLink="/register" class="card-link">Register</a>
+                <a href="#" class="card-link">Forgot Username/password?</a>
+            </div>
+        </div>
+        <app-mfa *ngIf="response.authValid && response.mfaRequired" [username]="response.username"></app-mfa>
+    </div>
+</div>
