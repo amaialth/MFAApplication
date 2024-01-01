@@ -30,6 +30,6 @@
                 <a href="#" class="card-link">Forgot Username/password?</a>
             </div>
         </div>
-        <app-mfa *ngIf="response.authValid && response.mfaRequired" [username]="response.username"></app-mfa>
+        <app-mfa *ngIf="response?.authValid && response?.mfaRequired" [username]="response.username"></app-mfa>
     </div>
 </div>
