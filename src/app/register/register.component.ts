@@ -10,6 +10,7 @@ import { AuthClientService } from '../auth-client.service';
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
   mfaRes: any;
+  isLoading = false;
   constructor(private authenticationClient: AuthClientService) { }
 
   ngOnInit(): void {
@@ -23,9 +24,11 @@ export class RegisterComponent implements OnInit {
     this.mfaRes = null;
   }
   register(){
+    this.isLoading = true;
     this.authenticationClient
       .register(this.registerForm.value)
       .subscribe((mfaQR:any) => {
+        this.isLoading = false;
         this.mfaRes = JSON.parse(mfaQR);
         console.log(this.mfaRes);
       });

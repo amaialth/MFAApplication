@@ -27,7 +27,11 @@
             <label class="form-check-label" for="mfa">Multi-Factor Authentication</label>
           </div>
           <div class="d-flex justify-content-center p-2">
-              <button type="button" [disabled]="!registerForm.valid" class="btn btn-primary" (click)="register()">Register</button>
+              <button type="button" [disabled]="!registerForm.valid" class="btn btn-primary" (click)="register()">Register
+                <div class="spinner-border text-secondary" *ngIf="isLoading" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
           </div>
     </form>
     
