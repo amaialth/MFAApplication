@@ -16,24 +16,13 @@ export class AuthService {
 
   public login(payload: MfaVerificationResponse): void {
     if(payload.tokenValid && !payload.mfaRequired){
+      localStorage.clear();
       localStorage.setItem(this.tokenKey, payload.jwt);
     }
   }
 
   public navidateToHome(): void {
     this.router.navigate(['/']);
-  }
-
-  public validateMfaCode(payload: MfaVerificationRequest): void {
-    let loginResponse = localStorage.getItem(this.tokenKey);
-    if(loginResponse){
-      let token: MfaVerificationResponse = JSON.parse(loginResponse);
-      payload.username = token.username;
-      this.authenticationClient.verifyTotp(payload).subscribe((response: MfaVerificationResponse) => {
-        if(response.tokenValid)
-          this.router.navigate(['/']);
-      });
-    }
   }
 
   public register(payload: string): void {

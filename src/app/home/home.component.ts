@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  message: string="";
+  constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
+    this.homeService.getProtectedString().subscribe(s=> this.message =s);
   }
 
 }

@@ -13,6 +13,7 @@ import { MfaComponent } from './login/mfa/mfa.component';
 import { DisplayQrComponent } from './register/display-qr/display-qr.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OtherMfaComponent } from './login/other-mfa/other-mfa.component';
+import { ErrorInterceptor } from './helpers/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { OtherMfaComponent } from './login/other-mfa/other-mfa.component';
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+  providers: [ { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
